@@ -50,4 +50,11 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
     implementation("com.google.android.gms:play-services-auth:20.6.0")
     implementation("com.google.firebase:firebase-database-ktx")
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
+    implementation ("com.github.bumptech.glide:recyclerview-integration:4.14.2") {
+        // Excludes the support library because it's already included by Glide.
+        transitive = false
+    }
 }

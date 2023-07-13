@@ -22,15 +22,15 @@ import com.ink.domism.firebase.FirebaseClass
 
 class IntroActivity : BaseActivity() {
 
-    lateinit var btnSignIn: Button
+    private lateinit var btnSignIn: Button
 
-    lateinit var topText: TextView
+    private lateinit var topText: TextView
 
-    lateinit var iMobileLayout: TextInputLayout
+    private lateinit var iMobileLayout: TextInputLayout
 
-    lateinit var iMobile : TextInputEditText
+    private lateinit var iMobile : TextInputEditText
 
-    lateinit var fab: FloatingActionButton
+    private lateinit var fab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

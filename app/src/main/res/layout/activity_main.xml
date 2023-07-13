@@ -4,13 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    android:orientation="vertical">
+
+    <!--com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        style="?attr/collapsingToolbarLayoutLargeStyle"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/collapsingToolbarLayoutLargeSize">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            app:title="Today's deals"
+            android:elevation="0dp" />
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+</com.google.android.material.appbar.AppBarLayout-->
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_gravity="center"/>
+        android:padding="32dp"
+        android:textSize="32sp"
+        android:text="Today's deals!"
+        android:layout_gravity="start"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idrecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

@@ -15,4 +15,16 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
+    <style name="ShapeAppearanceOverlay.App.CornerSize12.5Percent" parent="">
+        <item name="cornerSize">12.5%</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.App.CornerSize10Percent" parent="">
+        <item name="cornerSize">10%</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.App.CornerSize7.5Percent" parent="">
+        <item name="cornerSize">7.5%</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.App.CornerSize5Percent" parent="">
+        <item name="cornerSize">5%</item>
+    </style>
 </resources>
