@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -14,7 +13,6 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.ink.domism.R
 import com.ink.domism.adapters.RecyclerAdapter
-import com.ink.domism.firebase.FirebaseClass
 import com.ink.domism.models.Item
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         database.ref.child("items").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
+                    itemList.clear()
                     for(itemSnapshot in snapshot.children){
                         val itemInfo = itemSnapshot.getValue(Item::class.java)
                         itemList.add(itemInfo!!)
