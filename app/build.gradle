@@ -57,4 +57,5 @@ dependencies {
         // Excludes the support library because it's already included by Glide.
         transitive = false
     }
+    implementation 'io.github.pilgr:paperdb:2.7.2'
 }

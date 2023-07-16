@@ -14,6 +14,7 @@ import com.google.firebase.ktx.Firebase
 import com.ink.domism.R
 import com.ink.domism.adapters.RecyclerAdapter
 import com.ink.domism.models.Item
+import io.paperdb.Paper
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         getItemInfo(recyclerView)
+
+        Paper.init(this)
 
     }
 

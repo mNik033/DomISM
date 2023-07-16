@@ -8,7 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.ink.domism.R
+import com.ink.domism.activities.CartActivity
+import com.ink.domism.models.CartItem
 import com.ink.domism.models.Item
 
 class RecyclerAdapter(private val List : ArrayList<Item>):
@@ -30,7 +33,7 @@ class RecyclerAdapter(private val List : ArrayList<Item>):
         val count : TextView = itemView.findViewById(R.id.idItemCount)
         val btnRemove : ImageView = itemView.findViewById(R.id.remItem)
         val btnAdd : ImageView = itemView.findViewById(R.id.addItem)
-        var i = 0
+
         init {
             itemView.setOnClickListener{
                 listener.onItemClick(adapterPosition)
@@ -45,16 +48,17 @@ class RecyclerAdapter(private val List : ArrayList<Item>):
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        val item = CartItem(List[position])
+
         holder.itemName.text = List[position].name
         holder.origPrice.text = "₹" + List[position].origPrice.toString()
         holder.origPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         holder.origPrice.alpha = 0.69F
         holder.discPrice.text = "₹" + List[position].discPrice.toString()
+        holder.count.text = CartActivity.getItemQuantity(item).toString()
 
-        holder.btnAdd.setOnClickListener {
-            holder.i += 1
-            holder.count.text = holder.i.toString()
-            if(holder.i>0){
+        fun setVisibility(){
+            if(CartActivity.getItemQuantity(item)>0){
                 holder.btnRemove.visibility = View.VISIBLE
                 holder.count.visibility = View.VISIBLE
             }else{
@@ -63,16 +67,20 @@ class RecyclerAdapter(private val List : ArrayList<Item>):
             }
         }
 
+        setVisibility()
+
+        holder.btnAdd.setOnClickListener {
+            CartActivity.addItem(item)
+            Snackbar.make(it, item.product.name + " added to your cart!", Snackbar.LENGTH_SHORT).show()
+            holder.count.text = CartActivity.getItemQuantity(item).toString()
+            setVisibility()
+        }
+
         holder.btnRemove.setOnClickListener {
-            holder.i -= 1
-            holder.count.text = holder.i.toString()
-            if(holder.i>0){
-                holder.btnRemove.visibility = View.VISIBLE
-                holder.count.visibility = View.VISIBLE
-            }else{
-                holder.btnRemove.visibility = View.GONE
-                holder.count.visibility = View.GONE
-            }
+            CartActivity.removeItem(item)
+            Snackbar.make(it, item.product.name + " removed from your cart.", Snackbar.LENGTH_SHORT).show()
+            holder.count.text = CartActivity.getItemQuantity(item).toString()
+            setVisibility()
         }
 
         Glide
