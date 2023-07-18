@@ -1,7 +1,9 @@
 package com.ink.domism.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +29,11 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.idrecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val buttonCart = findViewById<ImageView>(R.id.btnCart)
+        buttonCart.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
 
         getItemInfo(recyclerView)
 

@@ -1,5 +1,6 @@
 package com.ink.domism.adapters
 
+import android.app.Activity
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -57,30 +58,26 @@ class RecyclerAdapter(private val List : ArrayList<Item>):
         holder.discPrice.text = "₹" + List[position].discPrice.toString()
         holder.count.text = CartActivity.getItemQuantity(item).toString()
 
-        fun setVisibility(){
-            if(CartActivity.getItemQuantity(item)>0){
-                holder.btnRemove.visibility = View.VISIBLE
-                holder.count.visibility = View.VISIBLE
-            }else{
-                holder.btnRemove.visibility = View.GONE
-                holder.count.visibility = View.GONE
-            }
+        if((holder.itemView.context as Activity).localClassName == "activities.CartActivity"){
+            holder.btnRemove.visibility = View.VISIBLE
+            holder.count.visibility = View.VISIBLE
         }
-
-        setVisibility()
 
         holder.btnAdd.setOnClickListener {
             CartActivity.addItem(item)
             Snackbar.make(it, item.product.name + " added to your cart!", Snackbar.LENGTH_SHORT).show()
             holder.count.text = CartActivity.getItemQuantity(item).toString()
-            setVisibility()
         }
 
         holder.btnRemove.setOnClickListener {
             CartActivity.removeItem(item)
             Snackbar.make(it, item.product.name + " removed from your cart.", Snackbar.LENGTH_SHORT).show()
             holder.count.text = CartActivity.getItemQuantity(item).toString()
-            setVisibility()
+            if(CartActivity.getItemQuantity(item)==0){
+                List.remove<Item>(item.product)
+                notifyItemRemoved(position)
+                notifyItemRangeChanged(position, itemCount - position)
+            }
         }
 
         Glide

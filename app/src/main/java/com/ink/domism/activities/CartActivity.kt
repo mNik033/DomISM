@@ -2,14 +2,40 @@ package com.ink.domism.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ink.domism.R
+import com.ink.domism.adapters.RecyclerAdapter
 import com.ink.domism.models.CartItem
+import com.ink.domism.models.Item
 import io.paperdb.Paper
 
 class CartActivity : AppCompatActivity() {
+
+    private lateinit var itemList : ArrayList<Item>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
+
+        itemList = arrayListOf()
+
+        getCart().forEach {
+            if(it.quantity!=0){
+                itemList += it.product
+            }
+        }
+
+        val adapter = RecyclerAdapter(itemList)
+        val recyclerView = findViewById<RecyclerView>(R.id.idrecyclerViewCart)
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
+
+        adapter.setOnItemClickListener(object: RecyclerAdapter.onItemClickListener{
+            override fun onItemClick(position : Int){
+            }
+        })
+
     }
 
     companion object{
