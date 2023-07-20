@@ -3,10 +3,11 @@ package com.ink.domism.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var itemList : ArrayList<Item>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_main)
 
         itemList = ArrayList()
@@ -30,11 +32,16 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.idrecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val buttonCart = findViewById<ImageView>(R.id.btnCart)
-        buttonCart.setOnClickListener {
-            startActivity(Intent(this, CartActivity::class.java))
+        val mToolbar = findViewById<MaterialToolbar>(R.id.main_toolbar)
+        mToolbar.setOnMenuItemClickListener{
+            when(it.itemId){
+                R.id.cart -> {
+                    startActivity(Intent(this, CartActivity::class.java))
+                    true
+                }
+                else -> false
+            }
         }
-
         getItemInfo(recyclerView)
 
         Paper.init(this)

@@ -2,8 +2,10 @@ package com.ink.domism.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.MaterialToolbar
 import com.ink.domism.R
 import com.ink.domism.adapters.RecyclerAdapter
 import com.ink.domism.models.CartItem
@@ -15,6 +17,7 @@ class CartActivity : AppCompatActivity() {
     private lateinit var itemList : ArrayList<Item>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_cart)
 
         itemList = arrayListOf()
@@ -30,6 +33,11 @@ class CartActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+
+        val mToolbar = findViewById<MaterialToolbar>(R.id.cart_toolbar)
+        mToolbar.setNavigationOnClickListener {
+            finish()
+        }
 
         adapter.setOnItemClickListener(object: RecyclerAdapter.onItemClickListener{
             override fun onItemClick(position : Int){
