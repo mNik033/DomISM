@@ -64,7 +64,11 @@ class ModalBottomSheet : BottomSheetDialogFragment(){
         btnCheckout.append(" (₹" + CartActivity.getTotalDiscPrice().toString()+")")
         btnCheckout.setOnClickListener {
             if(locationMenu.text.isNotEmpty()){
-                // do the thang
+                if(CartActivity.getTotalDiscPrice()!=0){
+                    // do the thang
+                }else{
+                    Toast.makeText(it.context, "what da dog doin?", Toast.LENGTH_SHORT).show()
+                }
             }else{
                 Toast.makeText(it.context, "Please select a location", Toast.LENGTH_SHORT).show()
             }

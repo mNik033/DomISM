@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.ink.domism.R
 import com.ink.domism.firebase.FirebaseClass
 
+var isRegistered : Boolean = false
+
 class IntroActivity : BaseActivity() {
 
     private lateinit var btnSignIn: Button
@@ -128,10 +130,12 @@ class IntroActivity : BaseActivity() {
         .setIsSmartLockEnabled(false)
         .build()
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        // Sign out the user if they haven't completed registration
-        AuthUI.getInstance().signOut(this)
+    override fun onPause(){
+        super.onPause()
+        if(!isRegistered){
+            // Sign out the user if they haven't completed registration
+            FirebaseAuth.getInstance().signOut()
+        }
     }
 
 }

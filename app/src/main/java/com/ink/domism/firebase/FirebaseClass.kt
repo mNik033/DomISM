@@ -13,6 +13,7 @@ import com.google.firebase.ktx.Firebase
 import com.ink.domism.activities.BaseActivity
 import com.ink.domism.activities.IntroActivity
 import com.ink.domism.activities.MainActivity
+import com.ink.domism.activities.isRegistered
 import com.ink.domism.models.Item
 import com.ink.domism.models.User
 
@@ -25,6 +26,7 @@ class FirebaseClass: BaseActivity() {
     fun registerUser(context: Context, userInfo: User) {
         database.child("users").child(userInfo.uid).setValue(userInfo)
             .addOnSuccessListener {
+                isRegistered = true
                 Toast.makeText(context, "Registered successfully!", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(context, MainActivity::class.java)
